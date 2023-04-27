@@ -1,0 +1,19 @@
+type,temp,time,rating
+Chocolate Chip,325 degrees,11,6
+Chocolate Chip,325 degrees,13,8
+Chocolate Chip,325 degrees,15,7
+Chocolate Chip,350 degrees,11,7.75
+Chocolate Chip,350 degrees,13,7
+Chocolate Chip,350 degrees,15,5
+Chocolate Chip,375 degrees,11,8
+Chocolate Chip,375 degrees,13,7
+Chocolate Chip,375 degrees,15,1
+Oatmeal,325 degrees,11,5
+Oatmeal,325 degrees,13,7
+Oatmeal,325 degrees,15,6
+Oatmeal,350 degrees,11,8.5
+Oatmeal,350 degrees,13,8.75
+Oatmeal,350 degrees,15,7
+Oatmeal,375 degrees,11,7
+Oatmeal,375 degrees,13,6.5
+Oatmeal,375 degrees,15,2
