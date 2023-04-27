@@ -1,0 +1,74 @@
+install.packages(c("ggplot2", "ggpubr", "tidyverse", "broom", "AICcmodavg"), repos = "http://cran.us.r-project.org")
+library(ggplot2)
+library(ggpubr)
+library(tidyverse)
+library(broom)
+library(AICcmodavg)
+
+library(readr)
+cookie <- read.csv("Downloads/cookie data fixed - Sheet1.csv", header = TRUE, colClasses = c("factor", "factor", "factor", "numeric"))
+summary(cookie)
+
+
+#type/taste
+one.factor <- aov(rating ~ type, data = cookie)
+summary(one.factor)
+
+#temp/taste
+one.factor2 <- aov(rating ~ temp, data = cookie)
+summary(one.factor2)
+
+#time/taste
+one.factor3 <- aov(rating ~ time, data = cookie)
+summary(one.factor3)
+
+#time+type/taste
+two.factor <- aov(rating ~ type + time, data = cookie)
+summary(two.factor)
+
+interaction <- aov(rating ~ type * time, data = cookie)
+summary(interaction)
+
+
+#time+temp/taste
+two.factor2 <- aov(rating ~ temp + time, data = cookie)
+summary(two.factor2)
+interaction2 <- aov(rating ~ temp * time, data = cookie)
+summary(interaction2)
+
+
+#type+temp/taste
+two.factor3 <- aov(rating ~ type + temp, data = cookie)
+summary(two.factor3)
+interaction3 <- aov(rating ~ type * temp, data = cookie)
+summary(interaction3)
+
+#type+time+temp/taste
+three.factor <- aov(rating ~ type + time + temp, data = cookie)
+summary(three.factor)
+
+interaction4 <- aov(rating ~ type*time*temp, data = cookie)
+summary(interaction4)
+
+
+#AIC model
+library(AICcmodavg)
+
+model1 <- lm(rating ~ time + temp + type, data = cookie)
+model2 <- lm(rating ~ time + type, data = cookie)
+model3 <- lm(rating ~ time + temp, data = cookie)
+model4 <- lm(rating ~ type + temp, data = cookie)
+models <- list(model1,model2,model3,model4)
+mod.names <- c('allthree','time.type','time.temp','type.temp')
+aictab(cand.set = models, modnames = mod.names)
+
+#Residuals
+par(mfrow=c(2,2))
+plot(two.factor2)
+par(mfrow=c(1,1))
+
+
+#TukeyHSD
+TukeyHSD(two.factor2, conf.level=.95)
+plot(TukeyHSD(two.factor2, conf.level=.95), las = 2)
+
